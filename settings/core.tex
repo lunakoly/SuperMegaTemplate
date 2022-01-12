@@ -1,0 +1,14 @@
+% This file contains configuration
+% for the whole project system itself
+% (a super-mega-important file that 
+% loads first). Contains crucial packages
+% and the corresponding helper functions.
+
+\usepackage{currfile}
+
+\newcommand{\pwd}{\currfiledir}
+
+\let\temp\input
+\renewcommand{\input}[1]{
+    \temp{\pwd#1}
+}
