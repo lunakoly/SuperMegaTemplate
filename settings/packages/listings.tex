@@ -1,0 +1,9 @@
+\usepackage{minted}
+
+\newcommand{\codefile}[2]{
+    \inputminted[
+        breaklines = true,
+        linenos,
+        frame = single,
+    ]{#1}{\pwd#2}
+}
