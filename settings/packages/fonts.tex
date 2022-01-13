@@ -1,0 +1,14 @@
+\usepackage{fontspec}
+
+\setmonofont{FiraCode}[
+    Contextuals = Alternate,
+	SizeFeatures = {
+	    Size = 10,
+    },
+	Path = \pwd/../fonts/,
+	Extension = .ttf,
+    UprightFont = *-Regular,
+]
+
+% Allows the use of FiraCode's ligatures within verbatim
+\usepackage[verbatim]{lstfiracode}
