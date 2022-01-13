@@ -1,0 +1,21 @@
+\newcommand{\emptyline}{\mbox{}\newline}
+
+\let\oldappendix\appendix
+\renewcommand{\appendix}[1]{
+    \cleardoublepage
+    \phantomsection
+    \stepcounter{chapter}
+    \stepcounter{totalappendicescounter}
+
+    \begin{center}
+        Приложение \Asbuk{chapter}
+    \end{center}
+
+    \begin{center}
+        {#1}
+    \end{center}
+
+    \emptyline
+    \addcontentsline{toc}{chapter}{\Asbuk{chapter}\hspace{0.6em}~#1}
+    \par
+}

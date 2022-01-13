@@ -1,9 +1,15 @@
-\documentclass[a4paper,12pt]{report}
+% `extreport` is used instead of `report`
+% because we need 14pt
+\documentclass[a4paper,14pt]{extreport}
 
 \input{settings/core}
 
 \append{settings/resources}
+\append{theme/variables}
+
 \append{settings/packages/main}
+\append{theme/main}
+
 \append{content/preamble}
 
 \begin{document}

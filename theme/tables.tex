@@ -1,0 +1,16 @@
+% Vertical paddings within a cell
+% \renewcommand{\arraystretch}{1.3}
+
+\renewenvironment{fixedtable}[1]{%
+    \begin{fixed}[with-top-captionof]{table}{#1}%
+}{%
+    \end{fixed}%
+    \stepcounter{totaltablescounter}%
+}
+
+\renewenvironment{floatingtable}[1]{%
+    \begin{floating}[with-top-caption]{table}{#1}%
+}{%
+    \end{floating}%
+    \stepcounter{totaltablescounter}%
+}

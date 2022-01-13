@@ -1,0 +1,20 @@
+\usepackage[russian]{babel}
+% Recommended by the compiler
+\usepackage{csquotes}
+
+\usepackage{hyphenat}
+\hyphenation{мате-мати-ка восста-навливать}
+
+% Indents the first paragraph of each sections
+\usepackage{indentfirst}
+\setlength\parindent{1.25cm}
+
+% We can't just redefine the
+% `\contentsname` if we use `babel`
+\addto{\captionsrussian}{
+    \renewcommand{\contentsname}{Содержание}
+}
+
+% List of listings
+\renewcommand\listingscaption{Листинг}
+\renewcommand{\listoflistingscaption}{Список листингов}

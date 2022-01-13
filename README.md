@@ -1,33 +1,17 @@
-# Super-Mega Template
+# Super-Mega Polytech Template
 
-This is a general-purpose template for XeLaTeX.
-You can use it as a foundation for reports, articles, etc.
+This is a template for university reports in Russian (XeLaTeX).
+You can use it as a foundation for reports, articles, etc. requiring GOST formatting.
 
-## What's Included
+This repo is based on the general-purpose [Super-Mega Template](https://github.com/lunakoly/SuperMegaTemplate).
 
-The template provides the minimal boilerplate for:
-* working with:
-  * figures
-  * tables
-  * listings (with ligatures & syntax highlighting)
-* pages with arbitrary layout
-* the table of contents (ToC)
-* the list of:
-  * figures
-  * tables
-  * listings
-* the bibliography
-* clickable references for the above
+## What's Changed
 
-## Project Structure
+The idea was to override styling on top of the default look and feel. So, all defaults are modified via the `theme` module, rather than changing something in the `settings` directly.
 
-To make the whole thing clear and intuitive, the whole project is organized in "modules".
+Some things are configured via variables that may optionally be defined before loading the `settings/packages`: these are configured by the `theme/variables.tex`.
 
-`main.tex` is a general name for "the main" file of a module. Typically, such a file makes use of other files of the module, making it the only thing the outer world needs. But this is not a strict rule, rather a recommendation.
-
-For example, the `settings` folder is a collection of various things needed to configure the project, but the `settings/packages` is a module that configures external dependencies (imports packages, configures the defaults and defines common topic-related helpers). Trivial imports may go directly in `settings/packages/main.tex`.
-
-The `settings/core.tex` file contains some vital global things that may be needed by the project itself (like the `\append` macro).
+Others are just the additional configurations performed after the `settings/packages`: `theme/main.tex`. The `theme` _may_ load additional packages if needed.
 
 ## How to Compile
 

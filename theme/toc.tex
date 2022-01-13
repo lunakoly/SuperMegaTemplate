@@ -1,0 +1,144 @@
+\setcounter{secnumdepth}{4}
+
+\usepackage[explicit]{titlesec}
+
+\titleformat
+    {\chapter}
+    {\bfseries\centering}
+    {\thechapter}{1em}{\MakeUppercase{#1}}
+
+\titlespacing*
+    {\chapter}
+    {0em}
+    {0.7em minus \baselineskip}
+    {0.7em}
+
+\titleformat
+    {\section}
+    {}
+    {\thesection}{1em}{#1}
+
+\titlespacing*
+    {\section}
+    {\parindent}
+    {0.7em}
+    {0.7em}
+
+\titleformat
+    {\subsection}
+    {}
+    {\thesubsection}{1em}{#1}
+
+\titlespacing*
+    {\subsection}
+    {\parindent}
+    {0.7em}
+    {0.7em}
+
+\titleformat
+    {\subsubsection}
+    {}
+    {\thesubsubsection}{1em}{#1}
+
+\titlespacing*
+    {\subsubsection}
+    {\parindent}
+    {0.7em}
+    {0.7em}
+
+\titleformat
+    {\paragraph}
+    {}
+    {\theparagraph}{1em}{#1}
+
+\titlespacing*
+    {\paragraph}
+    {\parindent}
+    {0.7em}
+    {0.7em}
+
+\titleformat
+    {\subparagraph}
+    {}
+    {\thesubparagraph}{1em}{#1}
+
+\titlespacing*
+    {\subparagraph}
+    {\parindent}
+    {0.7em}
+    {0.7em}
+
+% Links break after `\MakeUppercase`, see:
+% https://github.com/latex3/hyperref/issues/121.
+% The good thing is there is an older command
+% `\uppercase` which does the same, but without
+% expanding the argument (which is ok since we
+% use a utf-8 engine).
+
+\usepackage{titletoc}
+
+\titlecontents{chapter}[1em]
+    {\addvspace{0.15em}}
+    {\bfseries\contentslabel{1em}\uppercase}
+    {\hspace*{-1em}\bfseries\uppercase}
+    {\titlerule*[1pc]{.}\bfseries\contentspage}
+    [\addvspace{0.15em}]
+
+\titlecontents{section}[1.8em]
+    {}
+    {\contentslabel{1.8em}}
+    {\hspace*{-1.8em}}
+    {\titlerule*[1pc]{.}\contentspage}
+    [\addvspace{0em}]
+
+\titlecontents{figure}[1.8em]
+    {}
+    {\contentslabel{1.8em}}
+    {\hspace*{-1.8em}}
+    {\titlerule*[1pc]{.}\contentspage}
+    [\addvspace{0em}]
+
+\titlecontents{table}[1.8em]
+    {}
+    {\contentslabel{1.8em}}
+    {\hspace*{-1.8em}}
+    {\titlerule*[1pc]{.}\contentspage}
+    [\addvspace{0em}]
+
+\titlecontents{subsection}[2.6em]
+    {}
+    {\contentslabel{2.6em}}
+    {\hspace*{-2.6em}}
+    {\titlerule*[1pc]{.}\contentspage}
+    [\addvspace{0em}]
+
+% The following code is a fix that makes
+% minted lists of listings be styled the same
+% as the list of figures. This is needed,
+% because titletoc can't directly style `minted`s
+% list of listings.
+% https://tex.stackexchange.com/questions/58469/why-are-listof-and-listoffigures-styled-differently
+
+\usepackage{etoolbox}
+
+\makeatletter
+    \patchcmd{\@chapter}
+        {\addtocontents{lof}}
+        {
+            \addtocontents{lol}{\protect\addvspace{10pt}}
+            \addtocontents{lof}
+        }
+        {\typeout{*** SUCCESS ***}}
+        {\typeout{*** FAIL ***}}
+
+    \renewcommand*{\listof}[2]{%
+        \@ifundefined{ext@#1}{\float@error{#1}}{
+            \expandafter\let\csname l@#1\endcsname \l@figure % <- use layout of figure
+            \float@listhead{#2}
+            \begingroup
+            % \setlength\parskip{0pt plus 1pt} % <- or drop this line completely
+            \@starttoc{\@nameuse{ext@#1}}
+            \endgroup
+        }
+    }
+\makeatother

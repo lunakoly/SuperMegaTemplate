@@ -1,0 +1,19 @@
+% For `itemize`
+\renewcommand{\labelitemi}{--}
+\renewcommand{\labelitemii}{--}
+\renewcommand{\labelitemiii}{--}
+\renewcommand{\labelitemiv}{--}
+
+% For `enumerate`
+\renewcommand{\labelenumi}{\asbuk{enumi})}
+\renewcommand{\labelenumii}{\arabic{enumii})}
+
+% Removes all additional indents
+\usepackage{enumitem}
+
+% `enumitem` knows nothing about `asbuk`
+\makeatletter
+    \AddEnumerateCounter{\asbuk}{\@asbuk}{ю)}
+\makeatother
+
+\setlist{nosep, leftmargin=\parindent}
