@@ -1,0 +1,19 @@
+\usepackage{graphicx}
+
+\def\defaultgraphics{width=\textwidth}
+
+\newcommand{\figurefile}[2][\defaultgraphics]{
+   \centering\includegraphics[#1]{\pwd#2}
+}
+
+\newcommand{\fixedfigure}[3][\defaultgraphics]{
+    \begin{fixed}{figure}{#2}
+        \figurefile[#1]{#3}
+    \end{fixed}
+}
+
+\newcommand{\floatingfigure}[3][\defaultgraphics]{
+    \begin{floating}{figure}{#2}
+        \figurefile[#1]{#3}
+    \end{floating}
+}

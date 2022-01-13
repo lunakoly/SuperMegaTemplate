@@ -1,9 +1,27 @@
 \usepackage{minted}
 
-\newcommand{\codefile}[2]{
-    \inputminted[
-        breaklines = true,
-        linenos,
-        frame = single,
-    ]{#1}{\pwd#2}
+\setminted{
+    breaklines = true,
+    linenos,
+    frame = single,
 }
+
+\newcommand{\codefile}[2]{
+    \inputminted{#1}{\pwd#2}
+}
+
+\newcommand{\fixedlisting}[3]{
+    \begin{fixed}{listing}{#1}
+        \codefile{#2}{#3}
+    \end{fixed}
+}
+
+\newcommand{\floatinglisting}[3]{
+    \begin{floating}{listing}{#1}
+        \codefile{#2}{#3}
+    \end{floating}
+}
+
+% Fixes the listings numbering
+\usepackage{chngcntr}
+\counterwithin{listing}{chapter}

@@ -1,0 +1,9 @@
+\usepackage[
+    backend = biber,
+    hyperref = true,
+    defernumbers = true,
+]{biblatex}
+
+\newcommand{\appendbibliography}[1]{
+    \addbibresource{\pwd#1}
+}
