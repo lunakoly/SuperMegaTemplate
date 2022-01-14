@@ -7,3 +7,28 @@
     linkcolor=black,
     urlcolor=black
 }
+
+\usepackage[
+    nottoc,
+]{tocbibind}
+
+% `tocbibind` knows nothing about
+% `minted`'s list of listings, or
+% the bibliography, so we should 
+% add them manually
+
+\let\oldlistoflistings\listoflistings
+\renewcommand{\listoflistings}{
+    \cleardoublepage
+    \phantomsection
+    \addcontentsline{toc}{chapter}{\listoflistingscaption}
+    \oldlistoflistings
+}
+
+\let\oldprintbibliography\printbibliography
+\renewcommand{\printbibliography}{
+    \cleardoublepage
+    \phantomsection
+    \addcontentsline{toc}{chapter}{\bibname}
+    \oldprintbibliography
+}
