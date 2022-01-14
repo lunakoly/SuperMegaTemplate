@@ -11,24 +11,3 @@
 \newcommand{\append}[1]{
     \input{\pwd#1}
 }
-
-% Adds `\captionof` which works similar
-% to `\caption`, but doesn't require an
-% environment.
-\usepackage[hypcap=false]{caption}
-
-\newenvironment{floating}[2]{
-    \def\target{#1}
-    \def\title{#2}
-    \begin{\target}
-}{
-        \caption{\title}
-    \end{\target}
-}
-
-\newenvironment{fixed}[2]{
-    \def\target{#1}
-    \def\title{#2}
-}{
-    \captionof{\target}{\title}
-}

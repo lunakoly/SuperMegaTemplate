@@ -1,0 +1,24 @@
+\providecommand\captionoptions{
+    hypcap = false,
+}
+
+% Adds `\captionof` which works similar
+% to `\caption`, but doesn't require an
+% environment.
+\usepackage[\captionoptions]{caption}
+
+\newenvironment{floating}[2]{
+    \def\target{#1}
+    \def\title{#2}
+    \begin{\target}
+}{
+        \caption{\title}
+    \end{\target}
+}
+
+\newenvironment{fixed}[2]{
+    \def\target{#1}
+    \def\title{#2}
+}{
+    \captionof{\target}{\title}
+}
