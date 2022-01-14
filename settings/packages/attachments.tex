@@ -2,23 +2,77 @@
     hypcap = false,
 }
 
+\providecommand\attachmentmargin{1.5em}
+
+% Thanks, mate!
+% https://stackoverflow.com/questions/2318598/how-to-reduce-the-separation-from-other-text-using-latex-minted
+
 % Adds `\captionof` which works similar
 % to `\caption`, but doesn't require an
 % environment.
 \usepackage[\captionoptions]{caption}
 
+% Disable the default margin behavior.
+% Default margins don't work well
+% with `\captionof`, so I had to reinvent
+% the wheel.
+\setlength{\abovecaptionskip}{\attachmentmargin}
+\setlength{\belowcaptionskip}{0em}
+\BeforeBeginEnvironment{minted}{0em}
+\AfterEndEnvironment{minted}{0em}
+
+% This variable can't be scoped:
+% changine the value within an environment
+% wouldn't do anything!
+\setlength{\textfloatsep}{\attachmentmargin}
+
+\newenvironment{custom-margins}{
+    \let\oldpartopsep\partopsep
+    \let\oldintextsep\intextsep
+    \setlength{\partopsep}{-\topsep}
+    \setlength{\intextsep}{0em}
+}{
+    \setlength{\partopsep}{\oldpartopsep}
+    \setlength{\intextsep}{\oldintextsep}
+}
+
 \newenvironment{floating}[2]{
     \def\target{#1}
     \def\title{#2}
-    \begin{\target}
+
+    \begin{custom-margins}
+        \begin{\target}
 }{
-        \caption{\title}
-    \end{\target}
+            \caption{\title}
+        \end{\target}
+    \end{custom-margins}
 }
 
+% This version isn't used despite the name:
+%   - doesn't work for listings
+%   - margins behave incomprehensibly (to me)
 \newenvironment{fixed}[2]{
     \def\target{#1}
     \def\title{#2}
+    
+    \begin{custom-margins}
+        \begin{\target}[H]
+            \addvspace{\attachmentmargin}
 }{
-    \captionof{\target}{\title}
+            \caption{\title}
+            \addvspace{\attachmentmargin}
+        \end{\target}
+    \end{custom-margins}
+}
+
+\newenvironment{captioned}[2]{
+    \def\target{#1}
+    \def\title{#2}
+    
+    \begin{custom-margins}
+        \addvspace{\attachmentmargin}
+}{
+        \captionof{\target}{\title}
+        \addvspace{\attachmentmargin}
+    \end{custom-margins}
 }
