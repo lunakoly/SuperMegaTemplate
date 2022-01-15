@@ -8,27 +8,34 @@
     urlcolor=black
 }
 
+\newcommand{\addtocchapter}[1]{
+    \cleardoublepage
+    \phantomsection
+    \addcontentsline{toc}{chapter}{#1}
+}
+
+\newcommand{\silentchapter}[1]{
+    \addtocchapter{#1}
+    \chapter*{#1}
+}
+
 \usepackage[
     nottoc,
 ]{tocbibind}
 
 % `tocbibind` knows nothing about
 % `minted`'s list of listings, or
-% the bibliography, so we should 
+% the bibliography, so we should
 % add them manually
 
 \let\oldlistoflistings\listoflistings
 \renewcommand{\listoflistings}{
-    \cleardoublepage
-    \phantomsection
-    \addcontentsline{toc}{chapter}{\listoflistingscaption}
+    \addtocchapter{\listoflistingscaption}
     \oldlistoflistings
 }
 
 \let\oldprintbibliography\printbibliography
 \renewcommand{\printbibliography}{
-    \cleardoublepage
-    \phantomsection
-    \addcontentsline{toc}{chapter}{\bibname}
+    \addtocchapter{\bibname}
     \oldprintbibliography
 }
