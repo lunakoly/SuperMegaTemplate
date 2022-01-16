@@ -1,0 +1,31 @@
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\newenvironment{layouttable}[2]{
+    \let\oldtabcolsep\tabcolsep
+    \setlength{\tabcolsep}{0em}
+    \tabularx{#1}{#2}
+}{
+    \endtabularx
+    \setlength{\tabcolsep}{\oldtabcolsep}
+}
+
+\newenvironment{flexiblecolumns}[1][1]{
+    \let\oldtabcolsep\tabcolsep
+    \setlength{\tabcolsep}{0em}
+    \tabularx{\textwidth}{lY*{#1}r}
+}{
+    \endtabularx
+    \setlength{\tabcolsep}{\oldtabcolsep}
+}
+
+\newcommand{\hinttext}[1]{
+    \small{\textit{(#1)}}
+}
+
+\newcommand{\underhint}[1]{
+    \multicolumn{1}{c}{\hinttext{#1}}
+}
+
+\newcommand{\prefill}[1]{
+    \underline{\smash{#1}}
+}
