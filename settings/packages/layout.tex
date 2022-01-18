@@ -29,3 +29,23 @@
 \newcommand{\prefill}[1]{
     \underline{\smash{#1}}
 }
+
+\newcounter{savepage}
+
+\newcommand{\switchnumbering}[1]{
+    \setcounter{savepage}{\arabic{page}}
+    \pagenumbering{#1}
+    \setcounter{page}{\thesavepage}
+}
+
+\newenvironment{page}{}{
+    \clearpage
+}
+
+\newenvironment{unnumberedpage}{
+    \switchnumbering{gobble}
+    \begin{page}
+}{
+    \end{page}
+    \switchnumbering{arabic}
+}
