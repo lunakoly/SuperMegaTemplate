@@ -77,38 +77,42 @@
 
 \usepackage{titletoc}
 
-\titlecontents{chapter}[1em]
+\newcommand\chapterlabelindent{1.4em}
+\newcommand\sectionlabelindent{2.3em}
+\newcommand\subsectionlabelindent{3.2em}
+
+\titlecontents{chapter}[\chapterlabelindent]
     {\addvspace{0.15em}}
-    {\bfseries\contentslabel{1em}\uppercase}
-    {\hspace*{-1em}\bfseries\uppercase}
+    {\bfseries\contentslabel{\chapterlabelindent}\uppercase}
+    {\hspace*{-\chapterlabelindent}\bfseries\uppercase}
     {\titlerule*[1pc]{.}\bfseries\contentspage}
     [\addvspace{0.15em}]
 
-\titlecontents{section}[1.8em]
+\titlecontents{section}[\sectionlabelindent]
     {}
-    {\contentslabel{1.8em}}
-    {\hspace*{-1.8em}}
+    {\contentslabel{\sectionlabelindent}}
+    {\hspace*{-\sectionlabelindent}}
     {\titlerule*[1pc]{.}\contentspage}
     [\addvspace{0em}]
 
-\titlecontents{figure}[1.8em]
+\titlecontents{figure}[\sectionlabelindent]
     {}
-    {\contentslabel{1.8em}}
-    {\hspace*{-1.8em}}
+    {\contentslabel{\sectionlabelindent}}
+    {\hspace*{-\sectionlabelindent}}
     {\titlerule*[1pc]{.}\contentspage}
     [\addvspace{0em}]
 
-\titlecontents{table}[1.8em]
+\titlecontents{table}[\sectionlabelindent]
     {}
-    {\contentslabel{1.8em}}
-    {\hspace*{-1.8em}}
+    {\contentslabel{\sectionlabelindent}}
+    {\hspace*{-\sectionlabelindent}}
     {\titlerule*[1pc]{.}\contentspage}
     [\addvspace{0em}]
 
-\titlecontents{subsection}[2.6em]
+\titlecontents{subsection}[\subsectionlabelindent]
     {}
-    {\contentslabel{2.6em}}
-    {\hspace*{-2.6em}}
+    {\contentslabel{\subsectionlabelindent}}
+    {\hspace*{-\subsectionlabelindent}}
     {\titlerule*[1pc]{.}\contentspage}
     [\addvspace{0em}]
 
