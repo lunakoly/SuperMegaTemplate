@@ -1,1 +1,16 @@
 .DS_Store
+
+*.log
+
+main.aux
+main.bcf
+main.lof
+main.out
+main.toc
+main.run.xml
+main.pdf
+main.lol
+main.lot
+main.synctex*
+
+_minted-main
