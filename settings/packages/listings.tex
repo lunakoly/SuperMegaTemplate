@@ -6,20 +6,20 @@
     frame = single,
 }
 
-\newcommand{\codefile}[2]{
-    \inputminted{#1}{\pwd#2}
+\newcommand{\codefile}[2]{%
+    \inputminted{#1}{\pwd#2}%
 }
 
-\newcommand{\fixedlisting}[3]{
-    \begin{captioned}{listing}{#1}
-        \codefile{#2}{#3}
-    \end{captioned}
+\newcommand{\fixedlisting}[3]{%
+    \begin{captioned}{listing}{#1}%
+        \codefile{#2}{#3}%
+    \end{captioned}%
 }
 
-\newcommand{\floatinglisting}[3]{
-    \begin{floating}{listing}{#1}
-        \codefile{#2}{#3}
-    \end{floating}
+\newcommand{\floatinglisting}[3]{%
+    \begin{floating}{listing}{#1}%
+        \codefile{#2}{#3}%
+    \end{floating}%
 }
 
 % Fixes the listings numbering
