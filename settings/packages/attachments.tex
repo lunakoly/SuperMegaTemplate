@@ -4,10 +4,15 @@
 
 \providecommand\attachmentmargin{1em}
 
-% The margin before the caption is a bit bigger
-\providecommand\attachmentcaptionscaler{1.3}
+% The margin before the caption should be a bit bigger
+\providecommand\attachmentcaptionupscaler{1.3}
+% The margin after the caption should be a bit smaller
+\providecommand\attachmentcaptiondownscaler{0.7}
 
-\newcommand\attachmentcaptionskip{\attachmentcaptionscaler\dimexpr\attachmentmargin}
+% Before the bottom caption
+\newcommand\attachmentcaptionupskip{\attachmentcaptionupscaler\dimexpr\attachmentmargin}
+% After a top caption
+\newcommand\attachmentcaptiondownskip{\attachmentcaptiondownscaler\dimexpr\attachmentmargin}
 
 % Thanks, mate!
 % https://stackoverflow.com/questions/2318598/how-to-reduce-the-separation-from-other-text-using-latex-minted
@@ -24,7 +29,7 @@
 % Default margins don't work well
 % with `\captionof`, so I had to reinvent
 % the wheel.
-\setlength{\abovecaptionskip}{\attachmentcaptionskip}
+\setlength{\abovecaptionskip}{0em}
 \setlength{\belowcaptionskip}{0em}
 
 % This variable can't be scoped:
@@ -42,43 +47,66 @@
     \setlength{\intextsep}{\oldintextsep}%
 }
 
-\newenvironment{floating}[2]{%
-    \def\target{#1}%
-    \def\title{#2}%
+\newenvironment{with-top-caption}[1]{%
+    \edef\title{#1}%
+    \caption{\title}%
+    \vspace{\attachmentcaptiondownskip}%
+}{%
+}
+
+\newenvironment{with-top-captionof}[2]{%
+    \edef\target{#1}%
+    \edef\title{#2}%
+    \captionof{\target}{\title}%
+    \vspace{\attachmentcaptiondownskip}%
+}{%
+    \par%
+}
+
+\newenvironment{with-bottom-caption}[1]{%
+    \edef\title{#1}%
+}{%
+    \vspace{\attachmentcaptionupskip}%
+    \caption{\title}%
+}
+
+\newenvironment{with-bottom-captionof}[2]{%
+    \edef\target{#1}%
+    \edef\title{#2}%
+}{%
+    \vspace{\attachmentcaptionupskip}%
+    \captionof{\target}{\title}%
+}
+
+% For some reason, with-top-caption here only seems
+% to work with tables
+\newenvironment{floating}[3][with-bottom-caption]{%
+    \def\withcaption{#1}%
+    \def\target{#2}%
+    \def\title{#3}%
 %
     \begin{custom-margins}%
         \begin{\target}%
+            \begin{\withcaption}{\title}%
 }{%
-            \caption{\title}%
+            \end{\withcaption}%
         \end{\target}%
     \end{custom-margins}%
 }
 
-% This version isn't used despite the name:
-%   - doesn't work for listings
-%   - margins behave incomprehensibly (to me)
-\newenvironment{fixed}[2]{%
-    \def\target{#1}%
-    \def\title{#2}%
-%
-    \begin{custom-margins}%
-        \begin{\target}[H]%
-            \addvspace{\attachmentmargin}%
-}{%
-            \caption{\title}%
-            \addvspace{\attachmentmargin}%
-        \end{\target}%
-    \end{custom-margins}%
-}
-
-\newenvironment{captioned}[2]{%
-    \def\target{#1}%
-    \def\title{#2}%
+% Floats with [H] are not used, because
+% they can't break across pages, and this
+% is crucial for long listings.
+\newenvironment{fixed}[3][with-bottom-captionof]{%
+    \def\withcaptionof{#1}%
+    \def\target{#2}%
+    \def\title{#3}%
 %
     \begin{custom-margins}%
         \addvspace{\attachmentmargin}%
+        \begin{\withcaptionof}{\target}{\title}%
 }{%
-        \captionof{\target}{\title}%
+        \end{\withcaptionof}
         \addvspace{\attachmentmargin}%
     \end{custom-margins}%
 }
