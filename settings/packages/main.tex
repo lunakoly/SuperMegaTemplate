@@ -3,6 +3,13 @@
 % For quotes via `\say{}`
 \usepackage[\dirtytalkoptions]{dirtytalk}
 
+% This knows how to split urls across lines in \footnote
+\usepackage{xurl}
+
+% This prevents footnote urls from going to the
+% next page
+\interfootnotelinepenalty=10000
+
 \append{bibliography}
 \append{listings}
 \append{figures}
