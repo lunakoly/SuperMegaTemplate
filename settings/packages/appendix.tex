@@ -1,5 +1,9 @@
 \usepackage[title,titletoc]{appendix}
 
-\renewcommand{\appendix}[1]{ 
+\newtotcounter{totalappendicescounter}
+\def\totalappendicescount{\total{totalappendicescounter}}
+
+\renewcommand{\appendix}[1]{
     \chapter{#1}
+    \stepcounter{totalappendicescounter}
 }

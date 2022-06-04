@@ -3,6 +3,16 @@
 % For quotes via `\say{}`
 \usepackage[\dirtytalkoptions]{dirtytalk}
 
+% Allows to get the total count of sth.
+\usepackage{totcount}
+
+% Allows to get the total number of pages.
+% totcount is not used, because there's no
+% some single command that is always called
+% to create a "new page".
+\usepackage{lastpage}
+\def\totalpagescount{\pageref{LastPage}}
+
 % This knows how to split urls across lines in \footnote
 \usepackage{xurl}
 

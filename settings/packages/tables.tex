@@ -8,14 +8,19 @@
 
 \usepackage{tabularx}
 
+\newtotcounter{totaltablescounter}
+\def\totaltablescount{\total{totaltablescounter}}
+
 \newenvironment{fixedtable}[1]{%
     \begin{fixed}{table}{#1}%
 }{%
     \end{fixed}%
+    \stepcounter{totaltablescounter}%
 }
 
 \newenvironment{floatingtable}[1]{%
     \begin{floating}{table}{#1}%
 }{%
     \end{floating}%
+    \stepcounter{totaltablescounter}%
 }

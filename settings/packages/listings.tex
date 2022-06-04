@@ -6,8 +6,12 @@
     frame = single,
 }
 
+\newtotcounter{totallistingscounter}
+\def\totallistingscount{\total{totallistingscounter}}
+
 \newcommand{\codefile}[2]{%
     \inputminted{#1}{\pwd#2}%
+    \stepcounter{totallistingscounter}%
 }
 
 \newcommand{\fixedlisting}[3]{%

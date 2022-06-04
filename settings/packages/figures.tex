@@ -2,8 +2,12 @@
 
 \def\defaultgraphics{width=\textwidth}
 
+\newtotcounter{totalfigurescounter}
+\def\totalfigurescount{\total{totalfigurescounter}}
+
 \newcommand{\figurefile}[2][\defaultgraphics]{%
-   \centering\includegraphics[#1]{\pwd#2}%
+    \centering\includegraphics[#1]{\pwd#2}%
+    \stepcounter{totalfigurescounter}%
 }
 
 \newcommand{\fixedfigure}[3][\defaultgraphics]{%
